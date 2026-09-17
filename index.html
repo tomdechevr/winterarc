@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Winter Arc</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF9F5;
+    --bg-alt: #F1EDE4;
+    --surface: #FFFFFF;
+    --ink: #22201B;
+    --ink-soft: #6F6759;
+    --ink-faint: #A69E8E;
+    --accent: #C96442;
+    --accent-soft: #F1DECB;
+    --border: #E6E0D2;
+    --green: #55744A;
+    --green-soft: #E3EADB;
+    --red: #B14A3A;
+    --red-soft: #F3E0DA;
+    --grey: #B4ACA0;
+    --grey-soft: #ECE8DE;
+    --shadow: 0 1px 2px rgba(34,32,27,0.04), 0 8px 24px rgba(34,32,27,0.05);
+    --radius: 10px;
+    font-size: 16px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1C1A16;
+      --bg-alt: #26231D;
+      --surface: #221F1A;
+      --ink: #EFEAE0;
+      --ink-soft: #A79F8F;
+      --ink-faint: #756D5E;
+      --accent: #E08052;
+      --accent-soft: #3B2C22;
+      --border: #38342B;
+      --green: #8CAB7C;
+      --green-soft: #26301F;
+      --red: #D97B69;
+      --red-soft: #362320;
+      --grey: #6E675A;
+      --grey-soft: #2A2721;
+      --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1C1A16;
+    --bg-alt: #26231D;
+    --surface: #221F1A;
+    --ink: #EFEAE0;
+    --ink-soft: #A79F8F;
+    --ink-faint: #756D5E;
+    --accent: #E08052;
+    --accent-soft: #3B2C22;
+    --border: #38342B;
+    --green: #8CAB7C;
+    --green-soft: #26301F;
+    --red: #D97B69;
+    --red-soft: #362320;
+    --grey: #6E675A;
+    --grey-soft: #2A2721;
+    --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .serif { font-family: 'Fraunces', Georgia, serif; }
+
+  .app { display: flex; min-height: 100vh; }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    width: 232px;
+    flex-shrink: 0;
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 0 8px;
+  }
+  .brand-mark { font-size: 18px; }
+  .brand-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  nav.nav-list { display: flex; flex-direction: column; gap: 2px; }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: none;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .nav-item svg { width: 17px; height: 17px; flex-shrink: 0; stroke: currentColor; }
+  .nav-item:hover { background: var(--surface); color: var(--ink); }
+  .nav-item.active { background: var(--surface); color: var(--accent); box-shadow: var(--shadow); }
+
+  .sidebar-foot {
+    margin-top: auto;
+    padding: 0 8px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* ---------- Main ---------- */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 40px 48px 80px;
+    max-width: 880px;
+  }
+  .page { display: none; animation: fade 0.25s ease; }
+  .page.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .page-head { margin-bottom: 28px; }
+  .page-eyebrow { color: var(--ink-faint); font-size: 13px; margin-bottom: 4px; }
+  .page-head h1 { font-size: 28px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+
+  /* ---------- Dashboard ---------- */
+  .today-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-bottom: 20px;
+  }
+  .today-banner .date-line { color: var(--ink-soft); font-size: 14px; margin-bottom: 6px; text-transform: capitalize; }
+  .today-banner h2 { font-size: 24px; margin: 0; font-weight: 500; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .stat-label { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 10px; }
+  .stat-value { font-family: 'Fraunces', serif; font-size: 25px; font-weight: 500; }
+  .stat-value.pos { color: var(--green); }
+  .stat-value.neg { color: var(--red); }
+  .stat-sub { font-size: 12.5px; color: var(--ink-faint); margin-top: 6px; }
+  .stat-link {
+    display: inline-block; margin-top: 10px; font-size: 13px; color: var(--accent);
+    text-decoration: none; font-weight: 500; cursor: pointer;
+  }
+  .stat-link:hover { text-decoration: underline; }
+
+  /* ---------- Buttons / inputs ---------- */
+  .btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { border-color: var(--ink-faint); }
+  .btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-accent:hover { opacity: 0.92; }
+  .btn-round {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 19px; line-height: 1; padding: 0; font-weight: 500;
+  }
+  .btn-plus { background: var(--green-soft); color: var(--green); border-color: transparent; }
+  .btn-minus { background: var(--red-soft); color: var(--red); border-color: transparent; }
+  .btn-plus:hover, .btn-minus:hover { opacity: 0.85; }
+  .btn-ghost { background: none; border: none; color: var(--ink-faint); cursor: pointer; font-size: 13px; padding: 6px; }
+  .btn-ghost:hover { color: var(--red); }
+
+  input[type=text], input[type=number], textarea {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--ink);
+    width: 100%;
+  }
+  input:focus, textarea:focus, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  textarea { resize: vertical; font-family: 'Inter', sans-serif; line-height: 1.55; }
+
+  /* ---------- Wallet ---------- */
+  .wallet-hero {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px 26px; margin-bottom: 20px; gap: 16px;
+  }
+  .wallet-hero-label { font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+  .wallet-hero-value { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 500; }
+  .wallet-actions { display: flex; gap: 10px; flex-shrink: 0; }
+
+  .entry-form {
+    display: none;
+    background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; margin-bottom: 20px; gap: 10px; align-items: flex-end; flex-wrap: wrap;
+  }
+  .entry-form.open { display: flex; }
+  .entry-form .field { display: flex; flex-direction: column; gap: 5px; font-size: 12.5px; color: var(--ink-soft); }
+  .entry-form .field.grow { flex: 1; min-width: 160px; }
+  .entry-form input[type=number] { width: 120px; }
+  .entry-form-sign {
+    width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 16px; flex-shrink: 0; margin-bottom: 1px;
+  }
+  .entry-form-buttons { display: flex; gap: 8px; }
+
+  .tx-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .tx-row { background: var(--surface); display: flex; align-items: center; gap: 14px; padding: 13px 16px; }
+  .tx-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .tx-dot.pos { background: var(--green); }
+  .tx-dot.neg { background: var(--red); }
+  .tx-reason { flex: 1; font-size: 14.5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tx-date { font-size: 12.5px; color: var(--ink-faint); width: 90px; flex-shrink: 0; }
+  .tx-amount { font-weight: 500; font-size: 14.5px; width: 90px; text-align: right; flex-shrink: 0; }
+  .tx-amount.pos { color: var(--green); }
+  .tx-amount.neg { color: var(--red); }
+
+  .empty-state { text-align: center; padding: 44px 20px; color: var(--ink-faint); font-size: 14px; }
+
+  /* ---------- Calendar ---------- */
+  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .cal-month { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; text-transform: capitalize; }
+  .cal-nav-btns { display: flex; gap: 8px; }
+  .cal-nav-btns button {
+    width: 32px; height: 32px; border-radius: 7px; border: 1px solid var(--border);
+    background: var(--surface); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--ink-soft);
+  }
+  .cal-nav-btns button:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; }
+  .cal-dow { text-align: center; font-size: 11.5px; color: var(--ink-faint); padding-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .cal-cell {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    min-height: 66px; padding: 8px 9px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cal-cell.empty { background: transparent; border-color: transparent; }
+  .cal-cell.today { border-color: var(--accent); }
+  .cal-cell.clickable { cursor: pointer; transition: border-color 0.15s ease, transform 0.1s ease; }
+  .cal-cell.clickable:hover { border-color: var(--ink-faint); }
+  .cal-cell.clickable:active { transform: scale(0.97); }
+  .cal-daynum { font-size: 12.5px; color: var(--ink-soft); }
+  .cal-cell.today .cal-daynum { color: var(--accent); font-weight: 600; }
+  .cal-amount { font-size: 13px; font-weight: 500; }
+  .cal-amount.pos { color: var(--green); }
+  .cal-amount.neg { color: var(--red); }
+  .cal-amount.zero { color: var(--grey); }
+  .cal-amount.none { color: var(--ink-faint); }
+
+  /* ---------- Goals ---------- */
+  .goal-add { display: flex; gap: 10px; margin-bottom: 20px; }
+  .goal-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .goal-row { background: var(--surface); display: flex; align-items: center; gap: 13px; padding: 13px 16px; }
+  .goal-check {
+    width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--ink-faint);
+    flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; background: var(--surface);
+  }
+  .goal-check.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .goal-check svg { width: 12px; height: 12px; }
+  .goal-text { flex: 1; font-size: 14.5px; min-width: 0; word-break: break-word; }
+  .goal-text.done { color: var(--ink-faint); text-decoration: line-through; }
+  .goal-progress { margin-top: 18px; font-size: 13px; color: var(--ink-soft); }
+  .progress-track { height: 5px; background: var(--grey-soft); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.3s ease; }
+
+  /* ---------- Journal ---------- */
+  .journal-date-picker { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .journal-date-picker input[type=date] {
+    font-family: 'Inter', sans-serif; font-size: 15px; padding: 8px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  }
+  .rating-row { display: flex; align-items: center; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+  .rating-row span.rating-label { font-size: 13px; color: var(--ink-soft); margin-right: 4px; }
+  .rating-btn {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+    background: var(--surface); color: var(--ink-soft); font-size: 13.5px; font-weight: 500; cursor: pointer;
+  }
+  .rating-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .journal-save-row { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; flex-wrap: wrap; gap: 8px; }
+  .journal-save-status { font-size: 12.5px; color: var(--ink-faint); }
+
+  .journal-history { margin-top: 32px; }
+  .journal-history h3 { font-size: 15px; font-weight: 500; color: var(--ink-soft); margin-bottom: 12px; }
+  .jh-row {
+    display: flex; align-items: center; gap: 14px; padding: 12px 16px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 9px; margin-bottom: 8px; cursor: pointer;
+  }
+  .jh-row:hover { border-color: var(--ink-faint); }
+  .jh-date { font-size: 13px; color: var(--ink-soft); width: 90px; flex-shrink: 0; text-transform: capitalize; }
+  .jh-rating { font-family: 'Fraunces', serif; font-weight: 500; color: var(--accent); width: 30px; flex-shrink: 0; }
+  .jh-snippet { flex: 1; font-size: 13.5px; color: var(--ink-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+
+  .storage-banner {
+    display: none;
+    background: var(--accent-soft); color: var(--accent); border-radius: 8px;
+    padding: 8px 14px; font-size: 13px; margin-bottom: 18px;
+  }
+  .storage-banner.show { display: block; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 680px) {
+    .app { flex-direction: column; }
+    .main { padding: 20px 16px 96px; max-width: 100%; }
+
+    .sidebar {
+      position: fixed; bottom: 0; left: 0; right: 0; top: auto;
+      width: 100%; height: 62px;
+      flex-direction: row; align-items: center; justify-content: space-around;
+      padding: 4px 4px; gap: 0;
+      border-right: none; border-top: 1px solid var(--border);
+      z-index: 50;
+    }
+    .brand, .sidebar-foot { display: none; }
+    nav.nav-list { flex-direction: row; width: 100%; justify-content: space-around; gap: 0; }
+    .nav-item { flex-direction: column; gap: 3px; padding: 6px 2px; font-size: 10px; border-radius: 10px; flex: 1; }
+    .nav-item svg { width: 19px; height: 19px; }
+    .nav-item.active { box-shadow: none; }
+
+    .page-head h1 { font-size: 23px; }
+    .today-banner { padding: 20px; }
+    .today-banner h2 { font-size: 19px; }
+
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .stat-value { font-size: 21px; }
+
+    .wallet-hero { flex-direction: column; align-items: flex-start; }
+    .wallet-actions { align-self: flex-end; margin-top: -44px; }
+    .wallet-hero-value { font-size: 27px; }
+
+    .entry-form { flex-direction: column; align-items: stretch; }
+    .entry-form .field.grow { width: 100%; }
+    .entry-form-buttons { justify-content: flex-end; }
+
+    .tx-date { display: none; }
+    .tx-amount { width: auto; }
+
+    .cal-grid { gap: 5px; }
+    .cal-cell { min-height: 46px; padding: 5px 5px; border-radius: 6px; }
+    .cal-daynum { font-size: 11px; }
+    .cal-amount { font-size: 9.5px; }
+    .cal-dow { font-size: 10px; }
+
+    .jh-date { width: 56px; }
+    .rating-btn { width: 38px; height: 38px; }
+  }
+  @media (max-width: 380px) {
+    .stat-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">❄️</span>
+      <span class="brand-name">Winter Arc</span>
+    </div>
+    <nav class="nav-list">
+      <button class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Tableau de bord</span>
+      </button>
+      <button class="nav-item" data-page="wallet">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="21" height="15" rx="2"/><line x1="1.5" y1="10" x2="22.5" y2="10"/><circle cx="17" cy="15" r="1"/></svg>
+        <span>Wallet</span>
+      </button>
+      <button class="nav-item" data-page="calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"/><line x1="16" y1="2.5" x2="16" y2="6.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Calendar</span>
+      </button>
+      <button class="nav-item" data-page="goals">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
+        <span>Goals</span>
+      </button>
+      <button class="nav-item" data-page="journaling">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        <span>Journaling</span>
+      </button>
+    </nav>
+    <div class="sidebar-foot">Winter Arc &mdash; suivi personnel</div>
+  </aside>
+
+  <main class="main">
+
+    <div class="storage-banner" id="storageBanner">Le stockage local n'est pas disponible dans ce navigateur &mdash; tes données ne seront pas sauvegardées.</div>
+
+    <!-- ============ DASHBOARD ============ -->
+    <section class="page active" id="page-dashboard">
+      <div class="page-head">
+        <div class="page-eyebrow">Aujourd'hui</div>
+        <h1>Tableau de bord</h1>
+      </div>
+
+      <div class="today-banner">
+        <div class="date-line" id="todayDateLine"></div>
+        <h2 id="todayHeadline">Bonne journée de Winter Arc.</h2>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-label">Wallet global</div>
+          <div class="stat-value" id="dashWalletGlobalValue">0,00 €</div>
+          <div class="stat-sub" id="dashWalletGlobalSub">Aucun mouvement</div>
+          <a class="stat-link" data-goto="wallet">Voir le wallet →</a>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wallet du jour</div>
+          <div class="stat-value" id="dashWalletValue">0,00 €</div>
+          <div class="stat-sub" id="dashWalletSub">Aucune dépense enregistrée</div>
+          <a class="stat-link" data-goto="wallet">Voir le wallet →</a>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Objectifs</div>
+          <div class="stat-value" id="dashGoalsValue">0 / 0</div>
+          <div class="stat-sub" id="dashGoalsSub">réalisés</div>
+          <a class="stat-link" data-goto="goals">Voir les objectifs →</a>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Journal</div>
+          <div class="stat-value" id="dashJournalValue">—</div>
+          <div class="stat-sub" id="dashJournalSub">Pas encore écrit aujourd'hui</div>
+          <a class="stat-link" data-goto="journaling">Écrire →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WALLET ============ -->
+    <section class="page" id="page-wallet">
+      <div class="page-head">
+        <div class="page-eyebrow">Mini comptabilité</div>
+        <h1>Wallet</h1>
+      </div>
+
+      <div class="wallet-hero">
+        <div>
+          <div class="wallet-hero-label">Solde total</div>
+          <div class="wallet-hero-value" id="walletTotal">0,00 €</div>
+        </div>
+        <div class="wallet-actions">
+          <button class="btn btn-round btn-plus" id="btnAddPlus" title="Ajouter un gain" aria-label="Ajouter un gain">+</button>
+          <button class="btn btn-round btn-minus" id="btnAddMinus" title="Ajouter une dépense" aria-label="Ajouter une dépense">−</button>
+        </div>
+      </div>
+
+      <div class="entry-form" id="entryForm">
+        <div class="entry-form-sign" id="entryFormSign">+</div>
+        <div class="field">
+          <label for="entryAmount">Montant (€)</label>
+          <input type="number" id="entryAmount" placeholder="0,00" step="0.01" min="0" inputmode="decimal">
+        </div>
+        <div class="field grow">
+          <label for="entryReason">Raison</label>
+          <input type="text" id="entryReason" placeholder="Ex : café, vente, courses...">
+        </div>
+        <div class="entry-form-buttons">
+          <button class="btn btn-accent" id="entrySave">Ajouter</button>
+          <button class="btn" id="entryCancel">Annuler</button>
+        </div>
+      </div>
+
+      <div id="txListWrap"></div>
+    </section>
+
+    <!-- ============ CALENDAR ============ -->
+    <section class="page" id="page-calendar">
+      <div class="page-head">
+        <div class="page-eyebrow">Récap quotidien &mdash; clique une date pour journaliser</div>
+        <h1>Calendar</h1>
+      </div>
+
+      <div class="cal-nav">
+        <div class="cal-month" id="calMonthLabel"></div>
+        <div class="cal-nav-btns">
+          <button id="calPrev" aria-label="Mois précédent">‹</button>
+          <button id="calNext" aria-label="Mois suivant">›</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </section>
+
+    <!-- ============ GOALS ============ -->
+    <section class="page" id="page-goals">
+      <div class="page-head">
+        <div class="page-eyebrow">Winter Arc</div>
+        <h1>Goals</h1>
+      </div>
+
+      <div class="goal-add">
+        <input type="text" id="goalInput" placeholder="Nouvel objectif...">
+        <button class="btn btn-accent" id="goalAddBtn">Ajouter</button>
+      </div>
+
+      <div id="goalListWrap"></div>
+
+      <div class="goal-progress" id="goalProgressWrap" style="display:none;">
+        <span id="goalProgressText"></span>
+        <div class="progress-track"><div class="progress-fill" id="goalProgressFill" style="width:0%"></div></div>
+      </div>
+    </section>
+
+    <!-- ============ JOURNALING ============ -->
+    <section class="page" id="page-journaling">
+      <div class="page-head">
+        <div class="page-eyebrow">Écrire</div>
+        <h1>Journaling</h1>
+      </div>
+
+      <div class="journal-date-picker">
+        <input type="date" id="journalDate">
+      </div>
+
+      <div class="card">
+        <textarea id="journalText" rows="8" placeholder="Comment s'est passée ta journée ?"></textarea>
+        <div class="rating-row">
+          <span class="rating-label">Note sur 5</span>
+          <button class="rating-btn" data-rating="1">1</button>
+          <button class="rating-btn" data-rating="2">2</button>
+          <button class="rating-btn" data-rating="3">3</button>
+          <button class="rating-btn" data-rating="4">4</button>
+          <button class="rating-btn" data-rating="5">5</button>
+        </div>
+        <div class="journal-save-row">
+          <button class="btn btn-accent" id="journalSaveBtn">Enregistrer</button>
+          <span class="journal-save-status" id="journalSaveStatus"></span>
+        </div>
+      </div>
+
+      <div class="journal-history" id="journalHistoryWrap"></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- Utilities ----------
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+  const pad = n => String(n).padStart(2, "0");
+  const toDateStr = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const fmtMoney = n => {
+    const sign = n < 0 ? "−" : "";
+    return sign + Math.abs(n).toFixed(2).replace(".", ",") + " €";
+  };
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const DOW = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+  const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  const WEEKDAY_FULL = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+
+  function frenchDateLine(d) {
+    return `${WEEKDAY_FULL[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  }
+  function frenchShortDate(dateStr) {
+    const [y, m, day] = dateStr.split("-").map(Number);
+    return `${day} ${MONTHS[m - 1].slice(0, 3)}`;
+  }
+  function escapeHtml(s) {
+    const d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // ---------- Storage layer: real .json files served by server.py ----------
+  const FILES = { transactions: "transactions", goals: "goals", journal: "journal" };
+  let storageOk = true;
+
+  function showStorageBanner(msg) {
+    const b = $("#storageBanner");
+    if (msg) b.textContent = msg;
+    b.classList.add("show");
+  }
+
+  async function loadJSON(name, fallback) {
+    try {
+      const res = await fetch(`/api/${name}.json`, { cache: "no-store" });
+      if (!res.ok) throw new Error("bad status");
+      return await res.json();
+    } catch (e) {
+      storageOk = false;
+      return fallback;
+    }
+  }
+  async function saveJSON(name, data) {
+    try {
+      const res = await fetch(`/api/${name}.json`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data, null, 2)
+      });
+      if (!res.ok) throw new Error("bad status");
+      storageOk = true;
+      return true;
+    } catch (e) {
+      storageOk = false;
+      showStorageBanner();
+      return false;
+    }
+  }
+
+  let transactions = []; // {id, amount, reason, date, createdAt}
+  let goals = [];        // {id, text, done, createdAt}
+  let journal = {};      // dateStr -> {text, rating, updatedAt}
+
+  const persistTx = () => saveJSON(FILES.transactions, transactions);
+  const persistGoals = () => saveJSON(FILES.goals, goals);
+  const persistJournal = () => saveJSON(FILES.journal, journal);
+
+  if (location.protocol === "file:") {
+    showStorageBanner("Cette page a été ouverte directement dans le navigateur. Lance server.py (voir README) puis ouvre http://localhost:8420 pour que tes données soient sauvegardées dans les fichiers .json.");
+  }
+
+  let calCursor = new Date();
+  let pendingSign = 1;
+  let journalDirtyTimer = null;
+
+  const todayStr = () => toDateStr(new Date());
+
+  // ---------- Navigation ----------
+  function goToPage(name) {
+    $$(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.page === name));
+    $$(".page").forEach(p => p.classList.toggle("active", p.id === "page-" + name));
+    if (name === "calendar") renderCalendar();
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+  $$(".nav-item").forEach(b => b.addEventListener("click", () => goToPage(b.dataset.page)));
+  $$("[data-goto]").forEach(el => el.addEventListener("click", () => goToPage(el.dataset.goto)));
+
+  // ==========================================================
+  // DASHBOARD
+  // ==========================================================
+  function renderDashboard() {
+    const now = new Date();
+    $("#todayDateLine").textContent = frenchDateLine(now);
+
+    const globalTotal = transactions.reduce((a, tx) => a + tx.amount, 0);
+    const globalEl = $("#dashWalletGlobalValue");
+    globalEl.textContent = fmtMoney(globalTotal);
+    globalEl.className = "stat-value " + (globalTotal > 0 ? "pos" : globalTotal < 0 ? "neg" : "");
+    $("#dashWalletGlobalSub").textContent = transactions.length === 0
+      ? "Aucun mouvement"
+      : `${transactions.length} mouvement${transactions.length > 1 ? "s" : ""} au total`;
+
+    const t = todayStr();
+    const todays = transactions.filter(tx => tx.date === t);
+    const sum = todays.reduce((a, tx) => a + tx.amount, 0);
+    const walletVal = $("#dashWalletValue");
+    walletVal.textContent = fmtMoney(sum);
+    walletVal.className = "stat-value " + (sum > 0 ? "pos" : sum < 0 ? "neg" : "");
+    $("#dashWalletSub").textContent = todays.length === 0
+      ? "Aucune dépense enregistrée"
+      : `${todays.length} mouvement${todays.length > 1 ? "s" : ""} aujourd'hui`;
+
+    const done = goals.filter(g => g.done).length;
+    $("#dashGoalsValue").textContent = `${done} / ${goals.length}`;
+    $("#dashGoalsSub").textContent = goals.length === 0 ? "Aucun objectif défini" : "objectifs réalisés";
+
+    const j = journal[t];
+    if (j && (j.text || j.rating)) {
+      $("#dashJournalValue").textContent = j.rating ? `${j.rating} / 5` : "✓";
+      $("#dashJournalSub").textContent = "Journée déjà notée";
+    } else {
+      $("#dashJournalValue").textContent = "—";
+      $("#dashJournalSub").textContent = "Pas encore écrit aujourd'hui";
+    }
+  }
+
+  // ==========================================================
+  // WALLET
+  // ==========================================================
+  const entryForm = $("#entryForm");
+  function openEntryForm(sign) {
+    pendingSign = sign;
+    $("#entryFormSign").textContent = sign > 0 ? "+" : "−";
+    $("#entryFormSign").style.color = sign > 0 ? "var(--green)" : "var(--red)";
+    $("#entryFormSign").style.background = sign > 0 ? "var(--green-soft)" : "var(--red-soft)";
+    entryForm.classList.add("open");
+    $("#entryAmount").value = "";
+    $("#entryReason").value = "";
+    $("#entryAmount").focus();
+  }
+  $("#btnAddPlus").addEventListener("click", () => openEntryForm(1));
+  $("#btnAddMinus").addEventListener("click", () => openEntryForm(-1));
+  $("#entryCancel").addEventListener("click", () => entryForm.classList.remove("open"));
+
+  async function saveEntry() {
+    const amountRaw = parseFloat($("#entryAmount").value);
+    const reason = $("#entryReason").value.trim();
+    if (!amountRaw || amountRaw <= 0 || !reason) return;
+    const amount = pendingSign * Math.abs(amountRaw);
+    entryForm.classList.remove("open");
+    transactions.push({ id: uid(), amount, reason, date: todayStr(), createdAt: Date.now() });
+    renderAll();
+    await persistTx();
+  }
+  $("#entrySave").addEventListener("click", saveEntry);
+  $("#entryAmount").addEventListener("keydown", e => { if (e.key === "Enter") $("#entryReason").focus(); });
+  $("#entryReason").addEventListener("keydown", e => { if (e.key === "Enter") saveEntry(); });
+
+  async function deleteTx(id) {
+    transactions = transactions.filter(tx => tx.id !== id);
+    renderAll();
+    await persistTx();
+  }
+
+  function renderWallet() {
+    const total = transactions.reduce((a, tx) => a + tx.amount, 0);
+    const totalEl = $("#walletTotal");
+    totalEl.textContent = fmtMoney(total);
+    totalEl.style.color = total > 0 ? "var(--green)" : total < 0 ? "var(--red)" : "var(--ink)";
+
+    const wrap = $("#txListWrap");
+    if (transactions.length === 0) {
+      wrap.innerHTML = `<div class="empty-state">Rien pour l'instant. Ajoute ton premier mouvement avec les boutons + ou −.</div>`;
+      return;
+    }
+    const sorted = [...transactions].sort((a, b) => (b.date + b.createdAt) > (a.date + a.createdAt) ? 1 : -1);
+    wrap.innerHTML = `<div class="tx-list">` + sorted.map(tx => `
+      <div class="tx-row">
+        <div class="tx-dot ${tx.amount >= 0 ? "pos" : "neg"}"></div>
+        <div class="tx-reason">${escapeHtml(tx.reason)}</div>
+        <div class="tx-date">${frenchShortDate(tx.date)}</div>
+        <div class="tx-amount ${tx.amount >= 0 ? "pos" : "neg"}">${fmtMoney(tx.amount)}</div>
+        <button class="btn-ghost" data-del="${tx.id}" aria-label="Supprimer">✕</button>
+      </div>
+    `).join("") + `</div>`;
+    $$("[data-del]", wrap).forEach(b => b.addEventListener("click", () => deleteTx(b.dataset.del)));
+  }
+
+  // ==========================================================
+  // CALENDAR
+  // ==========================================================
+  function renderCalendar() {
+    const y = calCursor.getFullYear();
+    const m = calCursor.getMonth();
+    $("#calMonthLabel").textContent = `${MONTHS[m]} ${y}`;
+
+    const firstDay = new Date(y, m, 1);
+    const startOffset = (firstDay.getDay() + 6) % 7; // Monday-first
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+    const sumsByDay = {};
+    transactions.forEach(tx => {
+      if (!tx.date.startsWith(`${y}-${pad(m + 1)}`)) return;
+      sumsByDay[tx.date] = (sumsByDay[tx.date] || 0) + tx.amount;
+    });
+
+    let html = DOW.map(d => `<div class="cal-dow">${d}</div>`).join("");
+    for (let i = 0; i < startOffset; i++) html += `<div class="cal-cell empty"></div>`;
+
+    const t = todayStr();
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = `${y}-${pad(m + 1)}-${pad(day)}`;
+      const hasData = Object.prototype.hasOwnProperty.call(sumsByDay, dateStr);
+      const sum = sumsByDay[dateStr] || 0;
+      let cls = "none", label = "—";
+      if (hasData) {
+        if (sum > 0) { cls = "pos"; label = fmtMoney(sum); }
+        else if (sum < 0) { cls = "neg"; label = fmtMoney(sum); }
+        else { cls = "zero"; label = "0,00 €"; }
+      }
+      html += `
+        <div class="cal-cell clickable ${dateStr === t ? "today" : ""}" data-date="${dateStr}">
+          <div class="cal-daynum">${day}</div>
+          <div class="cal-amount ${cls}">${label}</div>
+        </div>`;
+    }
+    $("#calGrid").innerHTML = html;
+    $$(".cal-cell.clickable", $("#calGrid")).forEach(cell => {
+      cell.addEventListener("click", () => {
+        journalDateInput.value = cell.dataset.date;
+        loadJournalIntoEditor();
+        goToPage("journaling");
+      });
+    });
+  }
+  $("#calPrev").addEventListener("click", () => { calCursor.setMonth(calCursor.getMonth() - 1); renderCalendar(); });
+  $("#calNext").addEventListener("click", () => { calCursor.setMonth(calCursor.getMonth() + 1); renderCalendar(); });
+
+  // ==========================================================
+  // GOALS
+  // ==========================================================
+  async function addGoal() {
+    const text = $("#goalInput").value.trim();
+    if (!text) return;
+    $("#goalInput").value = "";
+    goals.push({ id: uid(), text, done: false, createdAt: Date.now() });
+    renderAll();
+    await persistGoals();
+  }
+  $("#goalAddBtn").addEventListener("click", addGoal);
+  $("#goalInput").addEventListener("keydown", e => { if (e.key === "Enter") addGoal(); });
+
+  async function toggleGoal(id) {
+    const g = goals.find(g => g.id === id);
+    if (!g) return;
+    g.done = !g.done;
+    renderAll();
+    await persistGoals();
+  }
+  async function deleteGoal(id) {
+    goals = goals.filter(g => g.id !== id);
+    renderAll();
+    await persistGoals();
+  }
+
+  function renderGoals() {
+    const wrap = $("#goalListWrap");
+    if (goals.length === 0) {
+      wrap.innerHTML = `<div class="empty-state">Aucun objectif pour l'instant. Ajoute ton premier objectif de Winter Arc ci-dessus.</div>`;
+      $("#goalProgressWrap").style.display = "none";
+      return;
+    }
+    wrap.innerHTML = `<div class="goal-list">` + goals.map(g => `
+      <div class="goal-row">
+        <div class="goal-check ${g.done ? "done" : ""}" data-toggle="${g.id}">
+          ${g.done ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : ""}
+        </div>
+        <div class="goal-text ${g.done ? "done" : ""}">${escapeHtml(g.text)}</div>
+        <button class="btn-ghost" data-del="${g.id}" aria-label="Supprimer">✕</button>
+      </div>
+    `).join("") + `</div>`;
+    $$("[data-toggle]", wrap).forEach(el => el.addEventListener("click", () => toggleGoal(el.dataset.toggle)));
+    $$("[data-del]", wrap).forEach(el => el.addEventListener("click", () => deleteGoal(el.dataset.del)));
+
+    const done = goals.filter(g => g.done).length;
+    $("#goalProgressWrap").style.display = "block";
+    $("#goalProgressText").textContent = `${done} / ${goals.length} objectifs réalisés`;
+    $("#goalProgressFill").style.width = `${Math.round((done / goals.length) * 100)}%`;
+  }
+
+  // ==========================================================
+  // JOURNALING
+  // ==========================================================
+  const journalDateInput = $("#journalDate");
+  journalDateInput.value = todayStr();
+
+  function loadJournalIntoEditor() {
+    const d = journalDateInput.value;
+    const entry = journal[d];
+    $("#journalText").value = entry ? entry.text || "" : "";
+    setRating(entry ? entry.rating || 0 : 0);
+    $("#journalSaveStatus").textContent = "";
+  }
+  function setRating(r) {
+    $$(".rating-btn").forEach(b => b.classList.toggle("active", Number(b.dataset.rating) === r));
+    $("#journalText").dataset.rating = r;
+  }
+  $$(".rating-btn").forEach(b => b.addEventListener("click", () => setRating(Number(b.dataset.rating))));
+  journalDateInput.addEventListener("change", loadJournalIntoEditor);
+
+  async function saveJournal() {
+    const d = journalDateInput.value;
+    const text = $("#journalText").value;
+    const rating = Number($("#journalText").dataset.rating || 0);
+    journal[d] = { text, rating, updatedAt: Date.now() };
+    renderDashboard();
+    renderJournalHistory();
+    const ok = await persistJournal();
+    $("#journalSaveStatus").textContent = ok ? "Enregistré ✓" : "Non sauvegardé — serveur indisponible";
+    clearTimeout(journalDirtyTimer);
+    journalDirtyTimer = setTimeout(() => { $("#journalSaveStatus").textContent = ""; }, 2500);
+  }
+  $("#journalSaveBtn").addEventListener("click", saveJournal);
+
+  function renderJournalHistory() {
+    const wrap = $("#journalHistoryWrap");
+    const entries = Object.entries(journal)
+      .filter(([, v]) => v && (v.text || v.rating))
+      .sort((a, b) => b[0].localeCompare(a[0]));
+    if (entries.length === 0) {
+      wrap.innerHTML = "";
+      return;
+    }
+    wrap.innerHTML = `<h3>Entrées précédentes</h3>` + entries.map(([date, e]) => `
+      <div class="jh-row" data-date="${date}">
+        <div class="jh-date">${frenchShortDate(date)}</div>
+        <div class="jh-rating">${e.rating ? e.rating + "/5" : "—"}</div>
+        <div class="jh-snippet">${escapeHtml(e.text || "")}</div>
+      </div>
+    `).join("");
+    $$(".jh-row", wrap).forEach(row => row.addEventListener("click", () => {
+      journalDateInput.value = row.dataset.date;
+      loadJournalIntoEditor();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }));
+  }
+
+  // ==========================================================
+  // INIT
+  // ==========================================================
+  function renderAll() {
+    renderDashboard();
+    renderWallet();
+    renderGoals();
+    renderJournalHistory();
+    if ($("#page-calendar").classList.contains("active")) renderCalendar();
+  }
+
+  renderAll();
+  loadJournalIntoEditor();
+
+  async function init() {
+    const [tx, gl, jr] = await Promise.all([
+      loadJSON(FILES.transactions, []),
+      loadJSON(FILES.goals, []),
+      loadJSON(FILES.journal, {})
+    ]);
+    transactions = Array.isArray(tx) ? tx : [];
+    goals = Array.isArray(gl) ? gl : [];
+    journal = jr && typeof jr === "object" ? jr : {};
+    renderAll();
+    loadJournalIntoEditor();
+  }
+  if (location.protocol !== "file:") init();
+})();
+</script>
+</body>
+</html>
