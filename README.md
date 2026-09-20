@@ -1,66 +1,66 @@
 # ❄️ Winter Arc
 
-Un mini-SaaS personnel, ultraminimaliste, pour suivre ton *Winter Arc* : finances, objectifs quotidiens, journaling et compte à rebours jusqu'au 25 décembre — le tout auto-hébergé, sans compte, sans cloud, sans dépendance.
+A personal, ultra-minimalist mini-SaaS to track your *Winter Arc*: finances, daily goals, journaling, and a countdown to December 25th — fully self-hosted, no account, no cloud, no dependencies.
 
-Aucune base de données, aucun framework : une page HTML/CSS/JS auto-contenue et un serveur Python de ~150 lignes (bibliothèque standard uniquement) qui lit et écrit directement dans des fichiers `.json` à la racine du projet.
+No database, no framework: a single self-contained HTML/CSS/JS page and a ~150-line Python server (standard library only) that reads and writes directly to `.json` files at the root of the project.
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Features
 
-| Page | Ce qu'elle fait |
+| Page | What it does |
 |---|---|
-| **Dashboard** | Compte à rebours jusqu'au 25 décembre (jour X / Y, barre de progression, date de départ modifiable), résumé du wallet global et du jour, avancement des objectifs, statut du journal du jour |
-| **Wallet** | Mini comptabilité : boutons **+** / **−** pour ajouter un mouvement (montant + raison), solde total, historique complet |
-| **Calendar** | Grille mensuelle avec le solde du jour en couleur (vert positif, rouge négatif, gris à zéro) — clique une date pour ouvrir directement le journaling de ce jour |
-| **Goals** | Objectifs **quotidiens** à cocher chaque jour, streak 🔥 en cours par objectif, grille de suivi façon *GitHub contributions* |
-| **Journaling** | Minuteur **Pomodoro** de 10 min pour la session d'écriture, texte du jour + note sur 5, historique consultable, courbe d'évolution de la note dans le temps |
+| **Dashboard** | Countdown to December 25th (day X / Y, progress bar, editable start date), global and today's wallet summary, goals progress, today's journal status |
+| **Wallet** | Mini accounting: **+** / **−** buttons to log a transaction (amount + reason), running balance, full history |
+| **Calendar** | Monthly grid with each day's balance shown in color (green positive, red negative, grey at zero) — click a date to jump straight into journaling for that day |
+| **Goals** | **Daily** goals to check off each day, current 🔥 streak per goal, GitHub-style contribution grid |
+| **Journaling** | 10-minute **Pomodoro** timer for your writing session, daily text entry + a rating out of 5, browsable history, rating trend line chart over time |
 
-Design ultraminimaliste, crème & terracotta, typo Fraunces/Inter — dans l'esprit de claude.ai. Mode sombre automatique selon les préférences système. Interface adaptée mobile (navigation en barre basse).
+Ultra-minimalist design, cream & terracotta palette, Fraunces/Inter typography — in the spirit of claude.ai. Automatic dark mode based on system preferences. Mobile-friendly layout (bottom navigation bar).
 
 ---
 
-## 🗂 Structure du projet
+## 🗂 Project structure
 
 ```
 winter-arc/
-├── index.html          # l'application (une seule page, aucune dépendance externe)
-├── server.py            # serveur local (Python 3, bibliothèque standard uniquement)
-├── transactions.json    # mouvements du wallet
-├── goals.json            # objectifs et historique de streaks
-├── journal.json          # entrées de journaling
-├── settings.json         # réglages (date de départ du Winter Arc)
+├── index.html          # the app (single page, no external dependencies)
+├── server.py            # local server (Python 3, standard library only)
+├── transactions.json    # wallet transactions
+├── goals.json            # goals and streak history
+├── journal.json          # journaling entries
+├── settings.json         # settings (Winter Arc start date)
 └── README.md
 ```
 
-Chaque fichier `.json` est lu et réécrit en clair à chaque action — ouvre-les avec n'importe quel éditeur de texte pour inspecter ou sauvegarder tes données brutes.
+Each `.json` file is read and rewritten in plain text on every action — open them with any text editor to inspect or back up your raw data.
 
 ---
 
-## 🚀 Démarrage
+## 🚀 Getting started
 
-**Prérequis :** Python 3 (déjà installé sur macOS/Linux ; sur Windows, installe-le depuis [python.org](https://python.org) en cochant *Add Python to PATH*).
+**Requirements:** Python 3 (already installed on macOS/Linux; on Windows, install it from [python.org](https://python.org) and check *Add Python to PATH*).
 
 ```bash
-git clone https://github.com/<ton-compte>/winter-arc.git
+git clone https://github.com/<your-username>/winter-arc.git
 cd winter-arc
 python3 server.py
 ```
 
-Le navigateur s'ouvre automatiquement sur **http://localhost:8420**. Si ce n'est pas le cas, ouvre l'adresse toi-même.
+Your browser will open automatically at **http://localhost:8420**. If it doesn't, open that address yourself.
 
-> ⚠️ N'ouvre jamais `index.html` directement (double-clic) : par sécurité, un fichier HTML seul ne peut pas lire/écrire de fichiers sur le disque. Il faut toujours passer par `server.py`.
+> ⚠️ Never open `index.html` directly (double-click): for security reasons, a standalone HTML file can't read or write files on disk. Always go through `server.py`.
 
-### Accès depuis tout le réseau local
+### Access from your whole local network
 
-Le serveur écoute sur `0.0.0.0` : au démarrage, le terminal affiche l'adresse à utiliser depuis un autre appareil du même réseau Wi-Fi (téléphone, tablette...) :
+The server listens on `0.0.0.0`: on startup, the terminal prints the address to use from another device on the same Wi-Fi network (phone, tablet...):
 
 ```
-- Sur cet appareil : http://localhost:8420
-- Depuis un autre appareil du réseau : http://192.168.x.x:8420
+- On this device: http://localhost:8420
+- From another device on the network: http://192.168.x.x:8420
 ```
 
-### Utilisation sur Android (Termux)
+### Running on Android (Termux)
 
 ```bash
 pkg install python
@@ -68,21 +68,21 @@ termux-setup-storage
 cd ~/storage/downloads/winter-arc
 python server.py
 ```
-Ouvre ensuite `http://localhost:8420` dans le navigateur du téléphone.
+Then open `http://localhost:8420` in the phone's browser.
 
 ---
 
-## 🛠 Stack technique
+## 🛠 Tech stack
 
-- **Frontend** : HTML/CSS/JS vanilla, aucune dépendance de build, aucune librairie externe (hormis les polices Google Fonts)
-- **Backend** : `http.server` de la bibliothèque standard Python — pas de Flask, pas de Django, pas de `pip install`
-- **Stockage** : fichiers `.json` en clair, à la racine du projet — lisibles, versionnables, sauvegardables en un copier-coller
+- **Frontend**: vanilla HTML/CSS/JS, no build step, no external libraries (aside from Google Fonts)
+- **Backend**: Python's standard library `http.server` — no Flask, no Django, no `pip install`
+- **Storage**: plain `.json` files at the project root — readable, versionable, easy to back up
 
 ---
 
-## 💾 Sauvegarde de tes données
+## 💾 Backing up your data
 
-Tes données vivent uniquement dans les fichiers `.json` de ce dossier. Pour les sauvegarder ou les transférer sur un autre appareil, copie simplement ces quatre fichiers :
+Your data lives only in the `.json` files in this folder. To back it up or move it to another device, just copy these four files:
 
 ```
 transactions.json  goals.json  journal.json  settings.json
@@ -90,18 +90,18 @@ transactions.json  goals.json  journal.json  settings.json
 
 ---
 
-## 📌 Idées d'évolution
+## 📌 Ideas for future work
 
-- [ ] Export / import en un clic (zip des `.json`)
-- [ ] Catégories de dépenses dans le Wallet
-- [ ] Bilan hebdomadaire / mensuel agrégé
-- [ ] Prompts guidés pour le journaling
-- [ ] Code PIN léger pour l'accès réseau
+- [ ] One-click export/import (zip of the `.json` files)
+- [ ] Expense categories in the Wallet
+- [ ] Weekly/monthly aggregated summary
+- [ ] Guided journaling prompts
+- [ ] Lightweight PIN code for network access
 
-Contributions et suggestions bienvenues via les *issues*.
+Contributions and suggestions are welcome via issues.
 
 ---
 
-## 📄 Licence
+## 📄 License
 
-MIT — fais-en ce que tu veux.
+MIT — do whatever you want with it.
