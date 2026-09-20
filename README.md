@@ -42,7 +42,7 @@ Each `.json` file is read and rewritten in plain text on every action — open t
 **Requirements:** Python 3 (already installed on macOS/Linux; on Windows, install it from [python.org](https://python.org) and check *Add Python to PATH*).
 
 ```bash
-git clone https://github.com/<your-username>/winter-arc.git
+git clone https://github.com/tomdechevr/winterarc.git
 cd winter-arc
 python3 server.py
 ```
