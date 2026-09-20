@@ -159,6 +159,36 @@
   }
 
   /* ---------- Dashboard ---------- */
+  .arc-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .arc-banner-left { flex: 1; min-width: 220px; }
+  .arc-eyebrow { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 4px; }
+  .arc-days { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; }
+  .arc-days .accent { color: var(--accent); }
+  .arc-sub { font-size: 12.5px; color: var(--ink-faint); margin-top: 4px; }
+  .arc-progress-wrap { flex: 1; min-width: 200px; }
+  .arc-progress-track { height: 8px; background: var(--grey-soft); border-radius: 5px; overflow: hidden; }
+  .arc-progress-fill { height: 100%; background: var(--accent); border-radius: 5px; transition: width 0.4s ease; }
+  .arc-progress-label { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--ink-faint); margin-top: 6px; }
+  .arc-edit-link { font-size: 12px; color: var(--accent); cursor: pointer; text-decoration: none; background: none; border: none; font-family: inherit; padding: 0; }
+  .arc-edit-link:hover { text-decoration: underline; }
+  .arc-edit-row { display: none; align-items: center; gap: 8px; margin-top: 10px; }
+  .arc-edit-row.open { display: flex; }
+  .arc-edit-row input[type=date] {
+    font-family: 'Inter', sans-serif; font-size: 13px; padding: 6px 8px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--ink);
+  }
+
   .today-banner {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -307,7 +337,27 @@
   .goal-check.done { background: var(--accent); border-color: var(--accent); color: #fff; }
   .goal-check svg { width: 12px; height: 12px; }
   .goal-text { flex: 1; font-size: 14.5px; min-width: 0; word-break: break-word; }
-  .goal-text.done { color: var(--ink-faint); text-decoration: line-through; }
+  .goal-streak {
+    display: flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600;
+    color: var(--ink-faint); flex-shrink: 0; padding: 3px 9px; border-radius: 20px; background: var(--bg-alt);
+  }
+  .goal-streak.active { color: var(--accent); background: var(--accent-soft); }
+  .goal-heat-btn {
+    background: none; border: 1px solid var(--border); border-radius: 7px; width: 30px; height: 30px;
+    flex-shrink: 0; cursor: pointer; color: var(--ink-faint); display: flex; align-items: center; justify-content: center;
+  }
+  .goal-heat-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .goal-heat-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  .goal-heat-btn svg { width: 15px; height: 15px; }
+  .goal-heatmap-row { background: var(--bg-alt); padding: 14px 16px 16px; display: none; }
+  .goal-heatmap-row.open { display: block; }
+  .heat-grid { display: flex; gap: 3px; overflow-x: auto; padding-bottom: 2px; }
+  .heat-week { display: flex; flex-direction: column; gap: 3px; }
+  .heat-cell { width: 11px; height: 11px; border-radius: 3px; background: var(--grey-soft); flex-shrink: 0; }
+  .heat-cell.on { background: var(--accent); }
+  .heat-cell.today { box-shadow: 0 0 0 1.5px var(--accent); }
+  .heat-legend { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-faint); margin-top: 8px; }
+  .heat-legend .heat-cell { width: 10px; height: 10px; }
   .goal-progress { margin-top: 18px; font-size: 13px; color: var(--ink-soft); }
   .progress-track { height: 5px; background: var(--grey-soft); border-radius: 4px; margin-top: 8px; overflow: hidden; }
   .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.3s ease; }
@@ -330,6 +380,22 @@
 
   .journal-history { margin-top: 32px; }
   .journal-history h3 { font-size: 15px; font-weight: 500; color: var(--ink-soft); margin-bottom: 12px; }
+
+  .rating-chart-wrap { margin-top: 32px; }
+  .rating-chart-wrap h3 { font-size: 15px; font-weight: 500; color: var(--ink-soft); margin-bottom: 12px; }
+  .rating-chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+  .rating-chart-svg { width: 100%; height: auto; display: block; }
+  .rating-chart-empty { text-align: center; padding: 24px; color: var(--ink-faint); font-size: 13.5px; }
+
+  .pomodoro-card { margin-bottom: 18px; }
+  .pomodoro-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .pomodoro-label { font-size: 13.5px; color: var(--ink-soft); }
+  .pomodoro-time { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .pomodoro-track { height: 6px; background: var(--grey-soft); border-radius: 5px; overflow: hidden; margin: 12px 0 14px; }
+  .pomodoro-fill { height: 100%; background: var(--accent); border-radius: 5px; transition: width 1s linear; }
+  .pomodoro-actions { display: flex; gap: 10px; }
+  .pomodoro-card.running .pomodoro-time { color: var(--accent); }
+  .pomodoro-card.done .pomodoro-time { color: var(--green); }
   .jh-row {
     display: flex; align-items: center; gap: 14px; padding: 12px 16px;
     background: var(--surface); border: 1px solid var(--border); border-radius: 9px; margin-bottom: 8px; cursor: pointer;
@@ -441,6 +507,26 @@
         <h1>Tableau de bord</h1>
       </div>
 
+      <div class="arc-banner">
+        <div class="arc-banner-left">
+          <div class="arc-eyebrow">Winter Arc &mdash; fin le 25 décembre</div>
+          <div class="arc-days" id="arcDaysLeft">—</div>
+          <div class="arc-sub" id="arcSub"></div>
+          <button class="arc-edit-link" id="arcEditToggle">Modifier la date de début</button>
+          <div class="arc-edit-row" id="arcEditRow">
+            <input type="date" id="arcStartInput">
+            <button class="btn btn-accent" id="arcStartSave" style="padding:6px 12px;font-size:13px;">OK</button>
+          </div>
+        </div>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-track"><div class="arc-progress-fill" id="arcProgressFill" style="width:0%"></div></div>
+          <div class="arc-progress-label">
+            <span id="arcStartLabel"></span>
+            <span>25 déc.</span>
+          </div>
+        </div>
+      </div>
+
       <div class="today-banner">
         <div class="date-line" id="todayDateLine"></div>
         <h2 id="todayHeadline">Bonne journée de Winter Arc.</h2>
@@ -531,12 +617,12 @@
     <!-- ============ GOALS ============ -->
     <section class="page" id="page-goals">
       <div class="page-head">
-        <div class="page-eyebrow">Winter Arc</div>
+        <div class="page-eyebrow">Winter Arc &mdash; à cocher chaque jour</div>
         <h1>Goals</h1>
       </div>
 
       <div class="goal-add">
-        <input type="text" id="goalInput" placeholder="Nouvel objectif...">
+        <input type="text" id="goalInput" placeholder="Nouvel objectif quotidien...">
         <button class="btn btn-accent" id="goalAddBtn">Ajouter</button>
       </div>
 
@@ -553,6 +639,18 @@
       <div class="page-head">
         <div class="page-eyebrow">Écrire</div>
         <h1>Journaling</h1>
+      </div>
+
+      <div class="card pomodoro-card">
+        <div class="pomodoro-head">
+          <div class="pomodoro-label">Pomodoro d'écriture &mdash; 10 min</div>
+          <div class="pomodoro-time" id="pomodoroTime">10:00</div>
+        </div>
+        <div class="pomodoro-track"><div class="pomodoro-fill" id="pomodoroFill" style="width:0%"></div></div>
+        <div class="pomodoro-actions">
+          <button class="btn btn-accent" id="pomodoroStart">Démarrer</button>
+          <button class="btn" id="pomodoroReset">Réinitialiser</button>
+        </div>
       </div>
 
       <div class="journal-date-picker">
@@ -573,6 +671,11 @@
           <button class="btn btn-accent" id="journalSaveBtn">Enregistrer</button>
           <span class="journal-save-status" id="journalSaveStatus"></span>
         </div>
+      </div>
+
+      <div class="rating-chart-wrap">
+        <h3>Évolution de ta note</h3>
+        <div class="rating-chart-card" id="ratingChartWrap"></div>
       </div>
 
       <div class="journal-history" id="journalHistoryWrap"></div>
@@ -613,7 +716,7 @@
   }
 
   // ---------- Storage layer: real .json files served by server.py ----------
-  const FILES = { transactions: "transactions", goals: "goals", journal: "journal" };
+  const FILES = { transactions: "transactions", goals: "goals", journal: "journal", settings: "settings" };
   let storageOk = true;
 
   function showStorageBanner(msg) {
@@ -652,10 +755,12 @@
   let transactions = []; // {id, amount, reason, date, createdAt}
   let goals = [];        // {id, text, done, createdAt}
   let journal = {};      // dateStr -> {text, rating, updatedAt}
+  let settings = {};     // { arcStartDate: "YYYY-MM-DD" }
 
   const persistTx = () => saveJSON(FILES.transactions, transactions);
   const persistGoals = () => saveJSON(FILES.goals, goals);
   const persistJournal = () => saveJSON(FILES.journal, journal);
+  const persistSettings = () => saveJSON(FILES.settings, settings);
 
   if (location.protocol === "file:") {
     showStorageBanner("Cette page a été ouverte directement dans le navigateur. Lance server.py (voir README) puis ouvre http://localhost:8420 pour que tes données soient sauvegardées dans les fichiers .json.");
@@ -680,7 +785,68 @@
   // ==========================================================
   // DASHBOARD
   // ==========================================================
+  function getArcEndDate() {
+    const now = new Date();
+    let end = new Date(now.getFullYear(), 11, 25); // 25 décembre
+    // Si le 25 décembre est déjà passé de plus d'une semaine, on vise l'année suivante.
+    if (now - end > 7 * 86400000) end = new Date(now.getFullYear() + 1, 11, 25);
+    return end;
+  }
+  function getArcStartDate() {
+    if (settings.arcStartDate) {
+      const [y, m, d] = settings.arcStartDate.split("-").map(Number);
+      return new Date(y, m - 1, d);
+    }
+    return null;
+  }
+  function renderArcBanner() {
+    const now = new Date();
+    const today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const end = getArcEndDate();
+    const msDay = 86400000;
+    const daysLeft = Math.max(0, Math.round((end - today0) / msDay));
+
+    const start = getArcStartDate() || today0;
+    const totalDays = Math.max(1, Math.round((end - start) / msDay));
+    const elapsed = Math.min(totalDays, Math.max(0, Math.round((today0 - start) / msDay)));
+    const pct = Math.min(100, Math.max(0, (elapsed / totalDays) * 100));
+
+    const daysLeftEl = $("#arcDaysLeft");
+    if (daysLeftEl) {
+      daysLeftEl.innerHTML = daysLeft <= 0
+        ? `C'est le <span class="accent">grand jour</span> 🎄`
+        : `<span class="accent">${daysLeft}</span> jour${daysLeft > 1 ? "s" : ""} avant le 25 décembre`;
+    }
+    const subEl = $("#arcSub");
+    if (subEl) subEl.textContent = `Jour ${elapsed} / ${totalDays} du Winter Arc`;
+    const fillEl = $("#arcProgressFill");
+    if (fillEl) fillEl.style.width = `${pct}%`;
+    const startLabelEl = $("#arcStartLabel");
+    if (startLabelEl) startLabelEl.textContent = frenchShortDate(toDateStr(start));
+    const startInputEl = $("#arcStartInput");
+    if (startInputEl && document.activeElement !== startInputEl) startInputEl.value = toDateStr(start);
+  }
+
+  const arcEditToggleBtn = $("#arcEditToggle");
+  if (arcEditToggleBtn) {
+    arcEditToggleBtn.addEventListener("click", () => {
+      $("#arcEditRow").classList.toggle("open");
+    });
+  }
+  const arcStartSaveBtn = $("#arcStartSave");
+  if (arcStartSaveBtn) {
+    arcStartSaveBtn.addEventListener("click", async () => {
+      const v = $("#arcStartInput").value;
+      if (!v) return;
+      settings.arcStartDate = v;
+      $("#arcEditRow").classList.remove("open");
+      renderArcBanner();
+      await persistSettings();
+    });
+  }
+
   function renderDashboard() {
+    renderArcBanner();
     const now = new Date();
     $("#todayDateLine").textContent = frenchDateLine(now);
 
@@ -702,9 +868,10 @@
       ? "Aucune dépense enregistrée"
       : `${todays.length} mouvement${todays.length > 1 ? "s" : ""} aujourd'hui`;
 
-    const done = goals.filter(g => g.done).length;
-    $("#dashGoalsValue").textContent = `${done} / ${goals.length}`;
-    $("#dashGoalsSub").textContent = goals.length === 0 ? "Aucun objectif défini" : "objectifs réalisés";
+    const t2 = todayStr();
+    const doneToday = goals.filter(g => Array.isArray(g.completedDates) && g.completedDates.includes(t2)).length;
+    $("#dashGoalsValue").textContent = `${doneToday} / ${goals.length}`;
+    $("#dashGoalsSub").textContent = goals.length === 0 ? "Aucun objectif défini" : "cochés aujourd'hui";
 
     const j = journal[t];
     if (j && (j.text || j.rating)) {
@@ -829,23 +996,85 @@
   $("#calNext").addEventListener("click", () => { calCursor.setMonth(calCursor.getMonth() + 1); renderCalendar(); });
 
   // ==========================================================
-  // GOALS
+  // GOALS (objectifs quotidiens + streak)
   // ==========================================================
+  function isDoneOn(goal, dateStr) {
+    return Array.isArray(goal.completedDates) && goal.completedDates.includes(dateStr);
+  }
+  function isDoneToday(goal) { return isDoneOn(goal, todayStr()); }
+
+  // Streak = jours consécutifs cochés en remontant depuis aujourd'hui.
+  // Si aujourd'hui n'est pas encore coché, on part d'hier (période de grâce
+  // jusqu'à la fin de la journée) sans casser le streak affiché.
+  function calcStreak(goal) {
+    const done = new Set(goal.completedDates || []);
+    let cursor = new Date();
+    if (!done.has(todayStr())) cursor.setDate(cursor.getDate() - 1);
+    let streak = 0;
+    while (done.has(toDateStr(cursor))) {
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    return streak;
+  }
+
+  const expandedHeatmaps = new Set(); // état UI seulement, non persisté
+
+  function buildHeatCells(goal, weeksCount) {
+    const today = new Date();
+    const todayDow = (today.getDay() + 6) % 7; // 0 = lundi
+    const currentWeekMonday = new Date(today);
+    currentWeekMonday.setDate(today.getDate() - todayDow);
+    const startMonday = new Date(currentWeekMonday);
+    startMonday.setDate(currentWeekMonday.getDate() - (weeksCount - 1) * 7);
+
+    const doneSet = new Set(goal.completedDates || []);
+    const t = todayStr();
+    let weeksHtml = "";
+    for (let w = 0; w < weeksCount; w++) {
+      let cellsHtml = "";
+      for (let d = 0; d < 7; d++) {
+        const dt = new Date(startMonday);
+        dt.setDate(startMonday.getDate() + w * 7 + d);
+        if (dt > today) {
+          cellsHtml += `<div class="heat-cell" style="visibility:hidden;"></div>`;
+          continue;
+        }
+        const ds = toDateStr(dt);
+        const on = doneSet.has(ds);
+        const isToday = ds === t;
+        cellsHtml += `<div class="heat-cell ${on ? "on" : ""} ${isToday ? "today" : ""}" title="${frenchShortDate(ds)}"></div>`;
+      }
+      weeksHtml += `<div class="heat-week">${cellsHtml}</div>`;
+    }
+    return weeksHtml;
+  }
+
+  function heatWeeksForViewport() {
+    return window.innerWidth <= 680 ? 8 : 13;
+  }
+
   async function addGoal() {
     const text = $("#goalInput").value.trim();
     if (!text) return;
     $("#goalInput").value = "";
-    goals.push({ id: uid(), text, done: false, createdAt: Date.now() });
+    goals.push({ id: uid(), text, completedDates: [], createdAt: Date.now() });
     renderAll();
     await persistGoals();
   }
   $("#goalAddBtn").addEventListener("click", addGoal);
   $("#goalInput").addEventListener("keydown", e => { if (e.key === "Enter") addGoal(); });
 
-  async function toggleGoal(id) {
+  async function toggleGoalToday(id) {
     const g = goals.find(g => g.id === id);
     if (!g) return;
-    g.done = !g.done;
+    if (!Array.isArray(g.completedDates)) g.completedDates = [];
+    const t = todayStr();
+    if (g.completedDates.includes(t)) {
+      g.completedDates = g.completedDates.filter(d => d !== t);
+    } else {
+      g.completedDates.push(t);
+    }
     renderAll();
     await persistGoals();
   }
@@ -858,26 +1087,142 @@
   function renderGoals() {
     const wrap = $("#goalListWrap");
     if (goals.length === 0) {
-      wrap.innerHTML = `<div class="empty-state">Aucun objectif pour l'instant. Ajoute ton premier objectif de Winter Arc ci-dessus.</div>`;
+      wrap.innerHTML = `<div class="empty-state">Aucun objectif pour l'instant. Ajoute ton premier objectif quotidien de Winter Arc ci-dessus.</div>`;
       $("#goalProgressWrap").style.display = "none";
       return;
     }
-    wrap.innerHTML = `<div class="goal-list">` + goals.map(g => `
+    const weeksCount = heatWeeksForViewport();
+    wrap.innerHTML = `<div class="goal-list">` + goals.map(g => {
+      const done = isDoneToday(g);
+      const streak = calcStreak(g);
+      const expanded = expandedHeatmaps.has(g.id);
+      return `
       <div class="goal-row">
-        <div class="goal-check ${g.done ? "done" : ""}" data-toggle="${g.id}">
-          ${g.done ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : ""}
+        <div class="goal-check ${done ? "done" : ""}" data-toggle="${g.id}" title="Cocher pour aujourd'hui">
+          ${done ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : ""}
         </div>
-        <div class="goal-text ${g.done ? "done" : ""}">${escapeHtml(g.text)}</div>
+        <div class="goal-text">${escapeHtml(g.text)}</div>
+        <div class="goal-streak ${streak > 0 ? "active" : ""}">🔥 ${streak}</div>
+        <button class="goal-heat-btn ${expanded ? "on" : ""}" data-heat="${g.id}" title="Voir la grille de suivi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        </button>
         <button class="btn-ghost" data-del="${g.id}" aria-label="Supprimer">✕</button>
       </div>
-    `).join("") + `</div>`;
-    $$("[data-toggle]", wrap).forEach(el => el.addEventListener("click", () => toggleGoal(el.dataset.toggle)));
+      <div class="goal-heatmap-row ${expanded ? "open" : ""}">
+        <div class="heat-grid">${buildHeatCells(g, weeksCount)}</div>
+        <div class="heat-legend">
+          <span>Moins</span>
+          <div class="heat-cell"></div>
+          <div class="heat-cell on"></div>
+          <span>Plus &mdash; ${weeksCount} dernières semaines</span>
+        </div>
+      </div>
+    `;
+    }).join("") + `</div>`;
+    $$("[data-toggle]", wrap).forEach(el => el.addEventListener("click", () => toggleGoalToday(el.dataset.toggle)));
     $$("[data-del]", wrap).forEach(el => el.addEventListener("click", () => deleteGoal(el.dataset.del)));
+    $$("[data-heat]", wrap).forEach(el => el.addEventListener("click", () => {
+      const id = el.dataset.heat;
+      if (expandedHeatmaps.has(id)) expandedHeatmaps.delete(id); else expandedHeatmaps.add(id);
+      renderGoals();
+    }));
 
-    const done = goals.filter(g => g.done).length;
+    const doneToday = goals.filter(isDoneToday).length;
     $("#goalProgressWrap").style.display = "block";
-    $("#goalProgressText").textContent = `${done} / ${goals.length} objectifs réalisés`;
-    $("#goalProgressFill").style.width = `${Math.round((done / goals.length) * 100)}%`;
+    $("#goalProgressText").textContent = `${doneToday} / ${goals.length} objectifs cochés aujourd'hui`;
+    $("#goalProgressFill").style.width = `${Math.round((doneToday / goals.length) * 100)}%`;
+  }
+
+  // ==========================================================
+  // POMODORO (10 min, pour la session de journaling)
+  // ==========================================================
+  const POMODORO_SECONDS = 10 * 60;
+  let pomodoroRemaining = POMODORO_SECONDS;
+  let pomodoroInterval = null;
+  let pomodoroRunning = false;
+
+  const pomodoroCard = $(".pomodoro-card");
+  const pomodoroTimeEl = $("#pomodoroTime");
+  const pomodoroFillEl = $("#pomodoroFill");
+  const pomodoroStartBtn = $("#pomodoroStart");
+  const pomodoroResetBtn = $("#pomodoroReset");
+
+  function formatPomodoro(s) {
+    const m = Math.floor(s / 60), sec = s % 60;
+    return `${pad(m)}:${pad(sec)}`;
+  }
+  function renderPomodoro() {
+    if (!pomodoroTimeEl) return;
+    pomodoroTimeEl.textContent = formatPomodoro(pomodoroRemaining);
+    const pct = ((POMODORO_SECONDS - pomodoroRemaining) / POMODORO_SECONDS) * 100;
+    pomodoroFillEl.style.width = `${pct}%`;
+  }
+  function playPomodoroChime() {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new Ctx();
+      const beep = (freq, delay) => setTimeout(() => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.type = "sine"; o.frequency.value = freq;
+        g.gain.setValueAtTime(0.001, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
+        o.start(); o.stop(ctx.currentTime + 0.6);
+      }, delay);
+      beep(880, 0);
+      beep(1108, 300);
+    } catch (e) { /* pas d'audio dispo, tant pis */ }
+  }
+  function pomodoroTick() {
+    pomodoroRemaining--;
+    if (pomodoroRemaining <= 0) {
+      pomodoroRemaining = 0;
+      renderPomodoro();
+      stopPomodoro();
+      pomodoroCard.classList.remove("running");
+      pomodoroCard.classList.add("done");
+      pomodoroStartBtn.textContent = "Redémarrer";
+      playPomodoroChime();
+      if (window.Notification && Notification.permission === "granted") {
+        try { new Notification("Pomodoro terminé", { body: "10 minutes d'écriture écoulées." }); } catch (e) {}
+      }
+      return;
+    }
+    renderPomodoro();
+  }
+  function stopPomodoro() {
+    pomodoroRunning = false;
+    clearInterval(pomodoroInterval);
+  }
+  function startPomodoro() {
+    if (pomodoroRunning) return;
+    if (window.Notification && Notification.permission === "default") {
+      try { Notification.requestPermission(); } catch (e) {}
+    }
+    if (pomodoroRemaining <= 0) pomodoroRemaining = POMODORO_SECONDS;
+    pomodoroRunning = true;
+    pomodoroCard.classList.remove("done");
+    pomodoroCard.classList.add("running");
+    pomodoroStartBtn.textContent = "Pause";
+    pomodoroInterval = setInterval(pomodoroTick, 1000);
+  }
+  function pausePomodoro() {
+    stopPomodoro();
+    pomodoroCard.classList.remove("running");
+    pomodoroStartBtn.textContent = "Reprendre";
+  }
+  function resetPomodoro() {
+    stopPomodoro();
+    pomodoroRemaining = POMODORO_SECONDS;
+    pomodoroCard.classList.remove("running", "done");
+    pomodoroStartBtn.textContent = "Démarrer";
+    renderPomodoro();
+  }
+  if (pomodoroStartBtn) {
+    pomodoroStartBtn.addEventListener("click", () => { pomodoroRunning ? pausePomodoro() : startPomodoro(); });
+    pomodoroResetBtn.addEventListener("click", resetPomodoro);
+    renderPomodoro();
   }
 
   // ==========================================================
@@ -907,12 +1252,53 @@
     journal[d] = { text, rating, updatedAt: Date.now() };
     renderDashboard();
     renderJournalHistory();
+    renderRatingChart();
     const ok = await persistJournal();
     $("#journalSaveStatus").textContent = ok ? "Enregistré ✓" : "Non sauvegardé — serveur indisponible";
     clearTimeout(journalDirtyTimer);
     journalDirtyTimer = setTimeout(() => { $("#journalSaveStatus").textContent = ""; }, 2500);
   }
   $("#journalSaveBtn").addEventListener("click", saveJournal);
+
+  function renderRatingChart() {
+    const wrap = $("#ratingChartWrap");
+    if (!wrap) return;
+    const entries = Object.entries(journal)
+      .filter(([, v]) => v && v.rating)
+      .sort((a, b) => a[0].localeCompare(b[0])); // ordre chronologique croissant
+
+    if (entries.length < 2) {
+      wrap.innerHTML = `<div class="rating-chart-empty">Note au moins deux journées pour voir la courbe apparaître.</div>`;
+      return;
+    }
+
+    const W = 640, H = 180, padL = 26, padR = 12, padT = 14, padB = 22;
+    const innerW = W - padL - padR, innerH = H - padT - padB;
+    const n = entries.length;
+    const xStep = n > 1 ? innerW / (n - 1) : 0;
+    const yFor = r => padT + innerH - ((r - 1) / 4) * innerH;
+
+    let gridLines = "";
+    for (let r = 1; r <= 5; r++) {
+      const y = yFor(r);
+      gridLines += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;
+      gridLines += `<text x="${padL - 6}" y="${y + 3}" font-size="9" text-anchor="end" fill="var(--ink-faint)">${r}</text>`;
+    }
+
+    const points = entries.map(([date, e], i) => ({ x: padL + i * xStep, y: yFor(e.rating), date }));
+    const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
+    const dots = points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="var(--accent)"><title>${frenchShortDate(p.date)}</title></circle>`).join("");
+
+    wrap.innerHTML = `
+      <svg class="rating-chart-svg" viewBox="0 0 ${W} ${H}">
+        ${gridLines}
+        <path d="${pathD}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        ${dots}
+        <text x="${padL}" y="${H - 4}" font-size="9" fill="var(--ink-faint)">${frenchShortDate(entries[0][0])}</text>
+        <text x="${W - padR}" y="${H - 4}" font-size="9" fill="var(--ink-faint)" text-anchor="end">${frenchShortDate(entries[entries.length - 1][0])}</text>
+      </svg>
+    `;
+  }
 
   function renderJournalHistory() {
     const wrap = $("#journalHistoryWrap");
@@ -945,6 +1331,7 @@
     renderWallet();
     renderGoals();
     renderJournalHistory();
+    renderRatingChart();
     if ($("#page-calendar").classList.contains("active")) renderCalendar();
   }
 
@@ -952,14 +1339,20 @@
   loadJournalIntoEditor();
 
   async function init() {
-    const [tx, gl, jr] = await Promise.all([
+    const [tx, gl, jr, st] = await Promise.all([
       loadJSON(FILES.transactions, []),
       loadJSON(FILES.goals, []),
-      loadJSON(FILES.journal, {})
+      loadJSON(FILES.journal, {}),
+      loadJSON(FILES.settings, {})
     ]);
     transactions = Array.isArray(tx) ? tx : [];
     goals = Array.isArray(gl) ? gl : [];
     journal = jr && typeof jr === "object" ? jr : {};
+    settings = st && typeof st === "object" ? st : {};
+    if (!settings.arcStartDate) {
+      settings.arcStartDate = todayStr();
+      persistSettings();
+    }
     renderAll();
     loadJournalIntoEditor();
   }
