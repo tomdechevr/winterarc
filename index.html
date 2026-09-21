@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -474,7 +474,7 @@
     <nav class="nav-list">
       <button class="nav-item active" data-page="dashboard">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Tableau de bord</span>
+        <span>Dashboard</span>
       </button>
       <button class="nav-item" data-page="wallet">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="5" width="21" height="15" rx="2"/><line x1="1.5" y1="10" x2="22.5" y2="10"/><circle cx="17" cy="15" r="1"/></svg>
@@ -493,26 +493,26 @@
         <span>Journaling</span>
       </button>
     </nav>
-    <div class="sidebar-foot">Winter Arc &mdash; suivi personnel</div>
+    <div class="sidebar-foot">Winter Arc &mdash; personal tracker</div>
   </aside>
 
   <main class="main">
 
-    <div class="storage-banner" id="storageBanner">Le stockage local n'est pas disponible dans ce navigateur &mdash; tes données ne seront pas sauvegardées.</div>
+    <div class="storage-banner" id="storageBanner">Local storage is not available in this browser &mdash; your data will not be saved.</div>
 
     <!-- ============ DASHBOARD ============ -->
     <section class="page active" id="page-dashboard">
       <div class="page-head">
-        <div class="page-eyebrow">Aujourd'hui</div>
-        <h1>Tableau de bord</h1>
+        <div class="page-eyebrow">Today</div>
+        <h1>Dashboard</h1>
       </div>
 
       <div class="arc-banner">
         <div class="arc-banner-left">
-          <div class="arc-eyebrow">Winter Arc &mdash; fin le 25 décembre</div>
+          <div class="arc-eyebrow">Winter Arc &mdash; ends December 25th</div>
           <div class="arc-days" id="arcDaysLeft">—</div>
           <div class="arc-sub" id="arcSub"></div>
-          <button class="arc-edit-link" id="arcEditToggle">Modifier la date de début</button>
+          <button class="arc-edit-link" id="arcEditToggle">Change start date</button>
           <div class="arc-edit-row" id="arcEditRow">
             <input type="date" id="arcStartInput">
             <button class="btn btn-accent" id="arcStartSave" style="padding:6px 12px;font-size:13px;">OK</button>
@@ -522,40 +522,40 @@
           <div class="arc-progress-track"><div class="arc-progress-fill" id="arcProgressFill" style="width:0%"></div></div>
           <div class="arc-progress-label">
             <span id="arcStartLabel"></span>
-            <span>25 déc.</span>
+            <span>Dec. 25</span>
           </div>
         </div>
       </div>
 
       <div class="today-banner">
         <div class="date-line" id="todayDateLine"></div>
-        <h2 id="todayHeadline">Bonne journée de Winter Arc.</h2>
+        <h2 id="todayHeadline">Have a great Winter Arc day.</h2>
       </div>
 
       <div class="stat-row">
         <div class="stat-card">
-          <div class="stat-label">Wallet global</div>
-          <div class="stat-value" id="dashWalletGlobalValue">0,00 €</div>
-          <div class="stat-sub" id="dashWalletGlobalSub">Aucun mouvement</div>
-          <a class="stat-link" data-goto="wallet">Voir le wallet →</a>
+          <div class="stat-label">Total Wallet</div>
+          <div class="stat-value" id="dashWalletGlobalValue">$0.00</div>
+          <div class="stat-sub" id="dashWalletGlobalSub">No transactions</div>
+          <a class="stat-link" data-goto="wallet">View wallet →</a>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Wallet du jour</div>
-          <div class="stat-value" id="dashWalletValue">0,00 €</div>
-          <div class="stat-sub" id="dashWalletSub">Aucune dépense enregistrée</div>
-          <a class="stat-link" data-goto="wallet">Voir le wallet →</a>
+          <div class="stat-label">Today's Wallet</div>
+          <div class="stat-value" id="dashWalletValue">$0.00</div>
+          <div class="stat-sub" id="dashWalletSub">No expenses recorded</div>
+          <a class="stat-link" data-goto="wallet">View wallet →</a>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Objectifs</div>
+          <div class="stat-label">Goals</div>
           <div class="stat-value" id="dashGoalsValue">0 / 0</div>
-          <div class="stat-sub" id="dashGoalsSub">réalisés</div>
-          <a class="stat-link" data-goto="goals">Voir les objectifs →</a>
+          <div class="stat-sub" id="dashGoalsSub">completed</div>
+          <a class="stat-link" data-goto="goals">View goals →</a>
         </div>
         <div class="stat-card">
           <div class="stat-label">Journal</div>
           <div class="stat-value" id="dashJournalValue">—</div>
-          <div class="stat-sub" id="dashJournalSub">Pas encore écrit aujourd'hui</div>
-          <a class="stat-link" data-goto="journaling">Écrire →</a>
+          <div class="stat-sub" id="dashJournalSub">Not written yet today</div>
+          <a class="stat-link" data-goto="journaling">Write →</a>
         </div>
       </div>
     </section>
@@ -563,34 +563,34 @@
     <!-- ============ WALLET ============ -->
     <section class="page" id="page-wallet">
       <div class="page-head">
-        <div class="page-eyebrow">Mini comptabilité</div>
+        <div class="page-eyebrow">Mini accounting</div>
         <h1>Wallet</h1>
       </div>
 
       <div class="wallet-hero">
         <div>
-          <div class="wallet-hero-label">Solde total</div>
-          <div class="wallet-hero-value" id="walletTotal">0,00 €</div>
+          <div class="wallet-hero-label">Total Balance</div>
+          <div class="wallet-hero-value" id="walletTotal">$0.00</div>
         </div>
         <div class="wallet-actions">
-          <button class="btn btn-round btn-plus" id="btnAddPlus" title="Ajouter un gain" aria-label="Ajouter un gain">+</button>
-          <button class="btn btn-round btn-minus" id="btnAddMinus" title="Ajouter une dépense" aria-label="Ajouter une dépense">−</button>
+          <button class="btn btn-round btn-plus" id="btnAddPlus" title="Add income" aria-label="Add income">+</button>
+          <button class="btn btn-round btn-minus" id="btnAddMinus" title="Add expense" aria-label="Add expense">−</button>
         </div>
       </div>
 
       <div class="entry-form" id="entryForm">
         <div class="entry-form-sign" id="entryFormSign">+</div>
         <div class="field">
-          <label for="entryAmount">Montant (€)</label>
-          <input type="number" id="entryAmount" placeholder="0,00" step="0.01" min="0" inputmode="decimal">
+          <label for="entryAmount">Amount ($)</label>
+          <input type="number" id="entryAmount" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
         </div>
         <div class="field grow">
-          <label for="entryReason">Raison</label>
-          <input type="text" id="entryReason" placeholder="Ex : café, vente, courses...">
+          <label for="entryReason">Reason</label>
+          <input type="text" id="entryReason" placeholder="E.g.: coffee, sale, groceries...">
         </div>
         <div class="entry-form-buttons">
-          <button class="btn btn-accent" id="entrySave">Ajouter</button>
-          <button class="btn" id="entryCancel">Annuler</button>
+          <button class="btn btn-accent" id="entrySave">Add</button>
+          <button class="btn" id="entryCancel">Cancel</button>
         </div>
       </div>
 
@@ -600,15 +600,15 @@
     <!-- ============ CALENDAR ============ -->
     <section class="page" id="page-calendar">
       <div class="page-head">
-        <div class="page-eyebrow">Récap quotidien &mdash; clique une date pour journaliser</div>
+        <div class="page-eyebrow">Daily recap &mdash; click a date to journal</div>
         <h1>Calendar</h1>
       </div>
 
       <div class="cal-nav">
         <div class="cal-month" id="calMonthLabel"></div>
         <div class="cal-nav-btns">
-          <button id="calPrev" aria-label="Mois précédent">‹</button>
-          <button id="calNext" aria-label="Mois suivant">›</button>
+          <button id="calPrev" aria-label="Previous month">‹</button>
+          <button id="calNext" aria-label="Next month">›</button>
         </div>
       </div>
       <div class="cal-grid" id="calGrid"></div>
@@ -617,13 +617,13 @@
     <!-- ============ GOALS ============ -->
     <section class="page" id="page-goals">
       <div class="page-head">
-        <div class="page-eyebrow">Winter Arc &mdash; à cocher chaque jour</div>
+        <div class="page-eyebrow">Winter Arc &mdash; check off every day</div>
         <h1>Goals</h1>
       </div>
 
       <div class="goal-add">
-        <input type="text" id="goalInput" placeholder="Nouvel objectif quotidien...">
-        <button class="btn btn-accent" id="goalAddBtn">Ajouter</button>
+        <input type="text" id="goalInput" placeholder="New daily goal...">
+        <button class="btn btn-accent" id="goalAddBtn">Add</button>
       </div>
 
       <div id="goalListWrap"></div>
@@ -637,19 +637,19 @@
     <!-- ============ JOURNALING ============ -->
     <section class="page" id="page-journaling">
       <div class="page-head">
-        <div class="page-eyebrow">Écrire</div>
+        <div class="page-eyebrow">Write</div>
         <h1>Journaling</h1>
       </div>
 
       <div class="card pomodoro-card">
         <div class="pomodoro-head">
-          <div class="pomodoro-label">Pomodoro d'écriture &mdash; 10 min</div>
+          <div class="pomodoro-label">Writing Pomodoro &mdash; 10 min</div>
           <div class="pomodoro-time" id="pomodoroTime">10:00</div>
         </div>
         <div class="pomodoro-track"><div class="pomodoro-fill" id="pomodoroFill" style="width:0%"></div></div>
         <div class="pomodoro-actions">
-          <button class="btn btn-accent" id="pomodoroStart">Démarrer</button>
-          <button class="btn" id="pomodoroReset">Réinitialiser</button>
+          <button class="btn btn-accent" id="pomodoroStart">Start</button>
+          <button class="btn" id="pomodoroReset">Reset</button>
         </div>
       </div>
 
@@ -658,9 +658,9 @@
       </div>
 
       <div class="card">
-        <textarea id="journalText" rows="8" placeholder="Comment s'est passée ta journée ?"></textarea>
+        <textarea id="journalText" rows="8" placeholder="How was your day?"></textarea>
         <div class="rating-row">
-          <span class="rating-label">Note sur 5</span>
+          <span class="rating-label">Rating out of 5</span>
           <button class="rating-btn" data-rating="1">1</button>
           <button class="rating-btn" data-rating="2">2</button>
           <button class="rating-btn" data-rating="3">3</button>
@@ -668,13 +668,13 @@
           <button class="rating-btn" data-rating="5">5</button>
         </div>
         <div class="journal-save-row">
-          <button class="btn btn-accent" id="journalSaveBtn">Enregistrer</button>
+          <button class="btn btn-accent" id="journalSaveBtn">Save</button>
           <span class="journal-save-status" id="journalSaveStatus"></span>
         </div>
       </div>
 
       <div class="rating-chart-wrap">
-        <h3>Évolution de ta note</h3>
+        <h3>Rating Evolution</h3>
         <div class="rating-chart-card" id="ratingChartWrap"></div>
       </div>
 
@@ -695,19 +695,19 @@
   const toDateStr = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const fmtMoney = n => {
     const sign = n < 0 ? "−" : "";
-    return sign + Math.abs(n).toFixed(2).replace(".", ",") + " €";
+    return sign + "$" + Math.abs(n).toFixed(2);
   };
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-  const DOW = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-  const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-  const WEEKDAY_FULL = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+  const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const WEEKDAY_FULL = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  function frenchDateLine(d) {
-    return `${WEEKDAY_FULL[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  function englishDateLine(d) {
+    return `${WEEKDAY_FULL[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
   }
-  function frenchShortDate(dateStr) {
+  function englishShortDate(dateStr) {
     const [y, m, day] = dateStr.split("-").map(Number);
-    return `${day} ${MONTHS[m - 1].slice(0, 3)}`;
+    return `${MONTHS[m - 1].slice(0, 3)} ${day}`;
   }
   function escapeHtml(s) {
     const d = document.createElement("div");
@@ -763,7 +763,7 @@
   const persistSettings = () => saveJSON(FILES.settings, settings);
 
   if (location.protocol === "file:") {
-    showStorageBanner("Cette page a été ouverte directement dans le navigateur. Lance server.py (voir README) puis ouvre http://localhost:8420 pour que tes données soient sauvegardées dans les fichiers .json.");
+    showStorageBanner("This page was opened directly in the browser. Run server.py (see README) then open http://localhost:8420 so your data is saved in .json files.");
   }
 
   let calCursor = new Date();
@@ -774,21 +774,20 @@
 
   // ---------- Navigation ----------
   function goToPage(name) {
-    $$(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.page === name));
-    $$(".page").forEach(p => p.classList.toggle("active", p.id === "page-" + name));
+    $$(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.page === name));     $$
+(".page").forEach(p => p.classList.toggle("active", p.id === "page-" + name));
     if (name === "calendar") renderCalendar();
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
   }
-  $$(".nav-item").forEach(b => b.addEventListener("click", () => goToPage(b.dataset.page)));
-  $$("[data-goto]").forEach(el => el.addEventListener("click", () => goToPage(el.dataset.goto)));
+  $$(".nav-item").forEach(b => b.addEventListener("click", () => goToPage(b.dataset.page)));   $$
+("[data-goto]").forEach(el => el.addEventListener("click", () => goToPage(el.dataset.goto)));
 
   // ==========================================================
   // DASHBOARD
   // ==========================================================
   function getArcEndDate() {
     const now = new Date();
-    let end = new Date(now.getFullYear(), 11, 25); // 25 décembre
-    // Si le 25 décembre est déjà passé de plus d'une semaine, on vise l'année suivante.
+    let end = new Date(now.getFullYear(), 11, 25); // December 25th
     if (now - end > 7 * 86400000) end = new Date(now.getFullYear() + 1, 11, 25);
     return end;
   }
@@ -814,15 +813,15 @@
     const daysLeftEl = $("#arcDaysLeft");
     if (daysLeftEl) {
       daysLeftEl.innerHTML = daysLeft <= 0
-        ? `C'est le <span class="accent">grand jour</span> 🎄`
-        : `<span class="accent">${daysLeft}</span> jour${daysLeft > 1 ? "s" : ""} avant le 25 décembre`;
+        ? `It's the <span class="accent">big day</span> 🎄`
+        : `<span class="accent">${daysLeft}</span> day${daysLeft > 1 ? "s" : ""} left until December 25th`;
     }
     const subEl = $("#arcSub");
-    if (subEl) subEl.textContent = `Jour ${elapsed} / ${totalDays} du Winter Arc`;
+    if (subEl) subEl.textContent = `Day ${elapsed} / ${totalDays} of Winter Arc`;
     const fillEl = $("#arcProgressFill");
     if (fillEl) fillEl.style.width = `${pct}%`;
     const startLabelEl = $("#arcStartLabel");
-    if (startLabelEl) startLabelEl.textContent = frenchShortDate(toDateStr(start));
+    if (startLabelEl) startLabelEl.textContent = englishShortDate(toDateStr(start));
     const startInputEl = $("#arcStartInput");
     if (startInputEl && document.activeElement !== startInputEl) startInputEl.value = toDateStr(start);
   }
@@ -848,15 +847,15 @@
   function renderDashboard() {
     renderArcBanner();
     const now = new Date();
-    $("#todayDateLine").textContent = frenchDateLine(now);
+    $("#todayDateLine").textContent = englishDateLine(now);
 
     const globalTotal = transactions.reduce((a, tx) => a + tx.amount, 0);
     const globalEl = $("#dashWalletGlobalValue");
     globalEl.textContent = fmtMoney(globalTotal);
     globalEl.className = "stat-value " + (globalTotal > 0 ? "pos" : globalTotal < 0 ? "neg" : "");
     $("#dashWalletGlobalSub").textContent = transactions.length === 0
-      ? "Aucun mouvement"
-      : `${transactions.length} mouvement${transactions.length > 1 ? "s" : ""} au total`;
+      ? "No transactions"
+      : `${transactions.length} transaction${transactions.length > 1 ? "s" : ""} total`;
 
     const t = todayStr();
     const todays = transactions.filter(tx => tx.date === t);
@@ -865,21 +864,21 @@
     walletVal.textContent = fmtMoney(sum);
     walletVal.className = "stat-value " + (sum > 0 ? "pos" : sum < 0 ? "neg" : "");
     $("#dashWalletSub").textContent = todays.length === 0
-      ? "Aucune dépense enregistrée"
-      : `${todays.length} mouvement${todays.length > 1 ? "s" : ""} aujourd'hui`;
+      ? "No expenses recorded"
+      : `${todays.length} transaction${todays.length > 1 ? "s" : ""} today`;
 
     const t2 = todayStr();
     const doneToday = goals.filter(g => Array.isArray(g.completedDates) && g.completedDates.includes(t2)).length;
     $("#dashGoalsValue").textContent = `${doneToday} / ${goals.length}`;
-    $("#dashGoalsSub").textContent = goals.length === 0 ? "Aucun objectif défini" : "cochés aujourd'hui";
+    $("#dashGoalsSub").textContent = goals.length === 0 ? "No goals defined" : "completed today";
 
     const j = journal[t];
     if (j && (j.text || j.rating)) {
       $("#dashJournalValue").textContent = j.rating ? `${j.rating} / 5` : "✓";
-      $("#dashJournalSub").textContent = "Journée déjà notée";
+      $("#dashJournalSub").textContent = "Day already logged";
     } else {
       $("#dashJournalValue").textContent = "—";
-      $("#dashJournalSub").textContent = "Pas encore écrit aujourd'hui";
+      $("#dashJournalSub").textContent = "Not written yet today";
     }
   }
 
@@ -929,7 +928,7 @@
 
     const wrap = $("#txListWrap");
     if (transactions.length === 0) {
-      wrap.innerHTML = `<div class="empty-state">Rien pour l'instant. Ajoute ton premier mouvement avec les boutons + ou −.</div>`;
+      wrap.innerHTML = `<div class="empty-state">Nothing here yet. Add your first transaction using the + or − buttons.</div>`;
       return;
     }
     const sorted = [...transactions].sort((a, b) => (b.date + b.createdAt) > (a.date + a.createdAt) ? 1 : -1);
@@ -937,9 +936,9 @@
       <div class="tx-row">
         <div class="tx-dot ${tx.amount >= 0 ? "pos" : "neg"}"></div>
         <div class="tx-reason">${escapeHtml(tx.reason)}</div>
-        <div class="tx-date">${frenchShortDate(tx.date)}</div>
+        <div class="tx-date">${englishShortDate(tx.date)}</div>
         <div class="tx-amount ${tx.amount >= 0 ? "pos" : "neg"}">${fmtMoney(tx.amount)}</div>
-        <button class="btn-ghost" data-del="${tx.id}" aria-label="Supprimer">✕</button>
+        <button class="btn-ghost" data-del="${tx.id}" aria-label="Delete">✕</button>
       </div>
     `).join("") + `</div>`;
     $$("[data-del]", wrap).forEach(b => b.addEventListener("click", () => deleteTx(b.dataset.del)));
@@ -975,7 +974,7 @@
       if (hasData) {
         if (sum > 0) { cls = "pos"; label = fmtMoney(sum); }
         else if (sum < 0) { cls = "neg"; label = fmtMoney(sum); }
-        else { cls = "zero"; label = "0,00 €"; }
+        else { cls = "zero"; label = "$0.00"; }
       }
       html += `
         <div class="cal-cell clickable ${dateStr === t ? "today" : ""}" data-date="${dateStr}">
@@ -983,8 +982,7 @@
           <div class="cal-amount ${cls}">${label}</div>
         </div>`;
     }
-    $("#calGrid").innerHTML = html;
-    $$(".cal-cell.clickable", $("#calGrid")).forEach(cell => {
+    $("#calGrid").innerHTML = html;     $$(".cal-cell.clickable", $("#calGrid")).forEach(cell => {
       cell.addEventListener("click", () => {
         journalDateInput.value = cell.dataset.date;
         loadJournalIntoEditor();
@@ -996,16 +994,13 @@
   $("#calNext").addEventListener("click", () => { calCursor.setMonth(calCursor.getMonth() + 1); renderCalendar(); });
 
   // ==========================================================
-  // GOALS (objectifs quotidiens + streak)
+  // GOALS (daily goals + streak)
   // ==========================================================
   function isDoneOn(goal, dateStr) {
     return Array.isArray(goal.completedDates) && goal.completedDates.includes(dateStr);
   }
   function isDoneToday(goal) { return isDoneOn(goal, todayStr()); }
 
-  // Streak = jours consécutifs cochés en remontant depuis aujourd'hui.
-  // Si aujourd'hui n'est pas encore coché, on part d'hier (période de grâce
-  // jusqu'à la fin de la journée) sans casser le streak affiché.
   function calcStreak(goal) {
     const done = new Set(goal.completedDates || []);
     let cursor = new Date();
@@ -1018,11 +1013,11 @@
     return streak;
   }
 
-  const expandedHeatmaps = new Set(); // état UI seulement, non persisté
+  const expandedHeatmaps = new Set();
 
   function buildHeatCells(goal, weeksCount) {
     const today = new Date();
-    const todayDow = (today.getDay() + 6) % 7; // 0 = lundi
+    const todayDow = (today.getDay() + 6) % 7; // 0 = Monday
     const currentWeekMonday = new Date(today);
     currentWeekMonday.setDate(today.getDate() - todayDow);
     const startMonday = new Date(currentWeekMonday);
@@ -1043,7 +1038,7 @@
         const ds = toDateStr(dt);
         const on = doneSet.has(ds);
         const isToday = ds === t;
-        cellsHtml += `<div class="heat-cell ${on ? "on" : ""} ${isToday ? "today" : ""}" title="${frenchShortDate(ds)}"></div>`;
+        cellsHtml += `<div class="heat-cell ${on ? "on" : ""} ${isToday ? "today" : ""}" title="${englishShortDate(ds)}"></div>`;
       }
       weeksHtml += `<div class="heat-week">${cellsHtml}</div>`;
     }
@@ -1087,7 +1082,7 @@
   function renderGoals() {
     const wrap = $("#goalListWrap");
     if (goals.length === 0) {
-      wrap.innerHTML = `<div class="empty-state">Aucun objectif pour l'instant. Ajoute ton premier objectif quotidien de Winter Arc ci-dessus.</div>`;
+      wrap.innerHTML = `<div class="empty-state">No goals yet. Add your first daily Winter Arc goal above.</div>`;
       $("#goalProgressWrap").style.display = "none";
       return;
     }
@@ -1098,30 +1093,30 @@
       const expanded = expandedHeatmaps.has(g.id);
       return `
       <div class="goal-row">
-        <div class="goal-check ${done ? "done" : ""}" data-toggle="${g.id}" title="Cocher pour aujourd'hui">
+        <div class="goal-check ${done ? "done" : ""}" data-toggle="${g.id}" title="Check for today">
           ${done ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : ""}
         </div>
         <div class="goal-text">${escapeHtml(g.text)}</div>
         <div class="goal-streak ${streak > 0 ? "active" : ""}">🔥 ${streak}</div>
-        <button class="goal-heat-btn ${expanded ? "on" : ""}" data-heat="${g.id}" title="Voir la grille de suivi">
+        <button class="goal-heat-btn ${expanded ? "on" : ""}" data-heat="${g.id}" title="View tracking grid">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
         </button>
-        <button class="btn-ghost" data-del="${g.id}" aria-label="Supprimer">✕</button>
+        <button class="btn-ghost" data-del="${g.id}" aria-label="Delete">✕</button>
       </div>
       <div class="goal-heatmap-row ${expanded ? "open" : ""}">
         <div class="heat-grid">${buildHeatCells(g, weeksCount)}</div>
         <div class="heat-legend">
-          <span>Moins</span>
+          <span>Less</span>
           <div class="heat-cell"></div>
           <div class="heat-cell on"></div>
-          <span>Plus &mdash; ${weeksCount} dernières semaines</span>
+          <span>More &mdash; last ${weeksCount} weeks</span>
         </div>
       </div>
     `;
     }).join("") + `</div>`;
     $$("[data-toggle]", wrap).forEach(el => el.addEventListener("click", () => toggleGoalToday(el.dataset.toggle)));
-    $$("[data-del]", wrap).forEach(el => el.addEventListener("click", () => deleteGoal(el.dataset.del)));
-    $$("[data-heat]", wrap).forEach(el => el.addEventListener("click", () => {
+    $$("[data-del]", wrap).forEach(el => el.addEventListener("click", () => deleteGoal(el.dataset.del)));     $$
+("[data-heat]", wrap).forEach(el => el.addEventListener("click", () => {
       const id = el.dataset.heat;
       if (expandedHeatmaps.has(id)) expandedHeatmaps.delete(id); else expandedHeatmaps.add(id);
       renderGoals();
@@ -1129,12 +1124,12 @@
 
     const doneToday = goals.filter(isDoneToday).length;
     $("#goalProgressWrap").style.display = "block";
-    $("#goalProgressText").textContent = `${doneToday} / ${goals.length} objectifs cochés aujourd'hui`;
+    $("#goalProgressText").textContent = `${doneToday} / ${goals.length} goals checked today`;
     $("#goalProgressFill").style.width = `${Math.round((doneToday / goals.length) * 100)}%`;
   }
 
   // ==========================================================
-  // POMODORO (10 min, pour la session de journaling)
+  // POMODORO (10 min, for journaling session)
   // ==========================================================
   const POMODORO_SECONDS = 10 * 60;
   let pomodoroRemaining = POMODORO_SECONDS;
@@ -1172,7 +1167,7 @@
       }, delay);
       beep(880, 0);
       beep(1108, 300);
-    } catch (e) { /* pas d'audio dispo, tant pis */ }
+    } catch (e) {}
   }
   function pomodoroTick() {
     pomodoroRemaining--;
@@ -1182,10 +1177,10 @@
       stopPomodoro();
       pomodoroCard.classList.remove("running");
       pomodoroCard.classList.add("done");
-      pomodoroStartBtn.textContent = "Redémarrer";
+      pomodoroStartBtn.textContent = "Restart";
       playPomodoroChime();
       if (window.Notification && Notification.permission === "granted") {
-        try { new Notification("Pomodoro terminé", { body: "10 minutes d'écriture écoulées." }); } catch (e) {}
+        try { new Notification("Pomodoro finished", { body: "10 minutes of writing completed." }); } catch (e) {}
       }
       return;
     }
@@ -1210,13 +1205,13 @@
   function pausePomodoro() {
     stopPomodoro();
     pomodoroCard.classList.remove("running");
-    pomodoroStartBtn.textContent = "Reprendre";
+    pomodoroStartBtn.textContent = "Resume";
   }
   function resetPomodoro() {
     stopPomodoro();
     pomodoroRemaining = POMODORO_SECONDS;
     pomodoroCard.classList.remove("running", "done");
-    pomodoroStartBtn.textContent = "Démarrer";
+    pomodoroStartBtn.textContent = "Start";
     renderPomodoro();
   }
   if (pomodoroStartBtn) {
@@ -1236,13 +1231,8 @@
     const entry = journal[d];
     $("#journalText").value = entry ? entry.text || "" : "";
     setRating(entry ? entry.rating || 0 : 0);
-    $("#journalSaveStatus").textContent = "";
-  }
-  function setRating(r) {
-    $$(".rating-btn").forEach(b => b.classList.toggle("active", Number(b.dataset.rating) === r));
-    $("#journalText").dataset.rating = r;
-  }
-  $$(".rating-btn").forEach(b => b.addEventListener("click", () => setRating(Number(b.dataset.rating))));
+    $("#journalSaveStatus").textContent = "";   }   function setRating(r) {     $$(".rating-btn").forEach(b => b.classList.toggle("active", Number(b.dataset.rating) === r));
+    $("#journalText").dataset.rating = r;   }   $$(".rating-btn").forEach(b => b.addEventListener("click", () => setRating(Number(b.dataset.rating))));
   journalDateInput.addEventListener("change", loadJournalIntoEditor);
 
   async function saveJournal() {
@@ -1254,7 +1244,7 @@
     renderJournalHistory();
     renderRatingChart();
     const ok = await persistJournal();
-    $("#journalSaveStatus").textContent = ok ? "Enregistré ✓" : "Non sauvegardé — serveur indisponible";
+    $("#journalSaveStatus").textContent = ok ? "Saved ✓" : "Not saved — server unavailable";
     clearTimeout(journalDirtyTimer);
     journalDirtyTimer = setTimeout(() => { $("#journalSaveStatus").textContent = ""; }, 2500);
   }
@@ -1265,10 +1255,10 @@
     if (!wrap) return;
     const entries = Object.entries(journal)
       .filter(([, v]) => v && v.rating)
-      .sort((a, b) => a[0].localeCompare(b[0])); // ordre chronologique croissant
+      .sort((a, b) => a[0].localeCompare(b[0]));
 
     if (entries.length < 2) {
-      wrap.innerHTML = `<div class="rating-chart-empty">Note au moins deux journées pour voir la courbe apparaître.</div>`;
+      wrap.innerHTML = `<div class="rating-chart-empty">Rate at least two days to see the chart appear.</div>`;
       return;
     }
 
@@ -1287,15 +1277,15 @@
 
     const points = entries.map(([date, e], i) => ({ x: padL + i * xStep, y: yFor(e.rating), date }));
     const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
-    const dots = points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="var(--accent)"><title>${frenchShortDate(p.date)}</title></circle>`).join("");
+    const dots = points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="var(--accent)"><title>${englishShortDate(p.date)}</title></circle>`).join("");
 
     wrap.innerHTML = `
       <svg class="rating-chart-svg" viewBox="0 0 ${W} ${H}">
         ${gridLines}
         <path d="${pathD}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
         ${dots}
-        <text x="${padL}" y="${H - 4}" font-size="9" fill="var(--ink-faint)">${frenchShortDate(entries[0][0])}</text>
-        <text x="${W - padR}" y="${H - 4}" font-size="9" fill="var(--ink-faint)" text-anchor="end">${frenchShortDate(entries[entries.length - 1][0])}</text>
+        <text x="${padL}" y="${H - 4}" font-size="9" fill="var(--ink-faint)">${englishShortDate(entries[0][0])}</text>
+        <text x="${W - padR}" y="${H - 4}" font-size="9" fill="var(--ink-faint)" text-anchor="end">${englishShortDate(entries[entries.length - 1][0])}</text>
       </svg>
     `;
   }
@@ -1309,9 +1299,9 @@
       wrap.innerHTML = "";
       return;
     }
-    wrap.innerHTML = `<h3>Entrées précédentes</h3>` + entries.map(([date, e]) => `
+    wrap.innerHTML = `<h3>Previous entries</h3>` + entries.map(([date, e]) => `
       <div class="jh-row" data-date="${date}">
-        <div class="jh-date">${frenchShortDate(date)}</div>
+        <div class="jh-date">${englishShortDate(date)}</div>
         <div class="jh-rating">${e.rating ? e.rating + "/5" : "—"}</div>
         <div class="jh-snippet">${escapeHtml(e.text || "")}</div>
       </div>
